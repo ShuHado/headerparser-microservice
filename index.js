@@ -4,7 +4,7 @@
 // init project
 import dotenv from "dotenv";
 import express from "express";
-var app = express();
+const app = express();
 dotenv.config();
 
 // enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
@@ -16,16 +16,11 @@ app.use(cors({ optionsSuccessStatus: 200 })); // some legacy browsers choke on 2
 app.use(express.static("public"));
 
 // http://expressjs.com/en/starter/basic-routing.html
-app.get("/", function (req, res) {
-	res.sendFile(__dirname + "/views/index.html");
-});
-
-// your first API endpoint...
-app.get("/api/hello", function (req, res) {
-	res.json({ greeting: "hello API" });
+app.get("/", (req, res) => {
+	res.sendFile(process.cwd() + "/views/index.html");
 });
 
 // listen for requests :)
-var listener = app.listen(process.env.PORT || 3000, function () {
+const listener = app.listen(process.env.PORT || 3000, () => {
 	console.log("Your app is listening on port " + listener.address().port);
 });
